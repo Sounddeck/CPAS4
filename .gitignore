@@ -27,3 +27,4 @@ frontend/build/
 # Python cache
 __pycache__/
 *.pyc
+ghp_*
