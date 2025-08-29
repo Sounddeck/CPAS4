@@ -1,0 +1,29 @@
+# Virtual environment (never commit this)
+venv/
+.venv/
+env/
+
+# Frontend build artifacts (likely what's making it huge)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Applications
+*.app
+
+# PDF files (if they're generated)
+*.pdf
+
+# Build artifacts
+*.dmg
+*.pkg
+
+# Python cache
+__pycache__/
+*.pyc
