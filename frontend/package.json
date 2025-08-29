@@ -1,0 +1,95 @@
+{
+  "name": "cpas-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "electron-builder",
+    "dist": "npm run build && npm run export && npm run electron-pack"
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^3.2.1",
+    "@date-io/dayjs": "^3.2.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.1",
+    "@mui/lab": "^7.0.0-beta.16",
+    "@mui/material": "^7.3.1",
+    "@mui/x-data-grid": "^8.10.2",
+    "@mui/x-date-pickers": "^8.10.2",
+    "@mui/x-date-pickers-pro": "^8.10.2",
+    "@types/d3": "7.4.1",
+    "@types/node": "20.8.0",
+    "@types/plotly.js": "2.12.29",
+    "@types/react": "18.2.25",
+    "@types/react-dom": "18.2.11",
+    "autoprefixer": "10.4.16",
+    "axios": "1.5.1",
+    "class-variance-authority": "0.7.0",
+    "clsx": "2.0.0",
+    "d3": "7.8.5",
+    "date-fns": "^4.1.0",
+    "dayjs": "^1.11.14",
+    "framer-motion": "^10.18.0",
+    "lucide-react": "0.288.0",
+    "next": "14.0.0",
+    "notistack": "^3.0.2",
+    "plotly.js": "2.26.0",
+    "postcss": "8.4.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-plotly.js": "2.6.0",
+    "tailwindcss": "3.3.5",
+    "typescript": "5.2.2",
+    "zustand": "4.4.4"
+  },
+  "devDependencies": {
+    "concurrently": "8.2.2",
+    "electron": "27.0.0",
+    "electron-builder": "24.6.4",
+    "eslint": "8.51.0",
+    "eslint-config-next": "14.0.0",
+    "wait-on": "7.2.0"
+  },
+  "main": "electron/main.js",
+  "homepage": "./",
+  "build": {
+    "appId": "com.cpas.master-agent",
+    "productName": "CPAS Master Agent",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "out/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}
