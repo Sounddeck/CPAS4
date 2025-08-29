@@ -1,0 +1,99 @@
+
+# Logging Configuration for Enhanced CPAS
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+  
+  detailed:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(module)s - %(funcName)s - %(lineno)d - %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+  
+  json:
+    format: '{"timestamp": "%(asctime)s", "logger": "%(name)s", "level": "%(levelname)s", "module": "%(module)s", "function": "%(funcName)s", "line": %(lineno)d, "message": "%(message)s"}'
+    datefmt: "%Y-%m-%d %H:%M:%S"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: standard
+    stream: ext://sys.stdout
+  
+  file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: detailed
+    filename: /home/ubuntu/cpas_enhanced/logs/cpas.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+  
+  error_file:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: detailed
+    filename: /home/ubuntu/cpas_enhanced/logs/cpas_errors.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+  
+  agent_file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: json
+    filename: /home/ubuntu/cpas_enhanced/logs/agent.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+  
+  voice_file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: json
+    filename: /home/ubuntu/cpas_enhanced/logs/voice.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+  
+  reasoning_file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: json
+    filename: /home/ubuntu/cpas_enhanced/logs/reasoning.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 5
+
+loggers:
+  "":
+    level: INFO
+    handlers: [console, file, error_file]
+    propagate: false
+  
+  cpas.agent:
+    level: DEBUG
+    handlers: [console, agent_file]
+    propagate: false
+  
+  cpas.voice:
+    level: DEBUG
+    handlers: [console, voice_file]
+    propagate: false
+  
+  cpas.reasoning:
+    level: DEBUG
+    handlers: [console, reasoning_file]
+    propagate: false
+  
+  uvicorn:
+    level: INFO
+    handlers: [console, file]
+    propagate: false
+  
+  uvicorn.access:
+    level: INFO
+    handlers: [console]
+    propagate: false
+
+root:
+  level: INFO
+  handlers: [console, file, error_file]

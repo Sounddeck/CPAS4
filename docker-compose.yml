@@ -1,0 +1,54 @@
+
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: cpas_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: cpas_admin
+      MONGO_INITDB_ROOT_PASSWORD: cpas_secure_password
+      MONGO_INITDB_DATABASE: cpas_enhanced
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - cpas_network
+
+  # Future services can be added here
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: cpas_ollama
+  #   restart: unless-stopped
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   networks:
+  #     - cpas_network
+
+  # cpas_backend:
+  #   build: ./backend
+  #   container_name: cpas_backend
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - MONGODB_URI=mongodb://cpas_admin:cpas_secure_password@mongodb:27017/cpas_enhanced?authSource=admin
+  #     - OLLAMA_BASE_URL=http://ollama:11434
+  #   depends_on:
+  #     - mongodb
+  #     - ollama
+  #   networks:
+  #     - cpas_network
+
+volumes:
+  mongodb_data:
+  # ollama_data:
+
+networks:
+  cpas_network:
+    driver: bridge
