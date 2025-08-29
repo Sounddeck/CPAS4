@@ -28,3 +28,4 @@ frontend/build/
 __pycache__/
 *.pyc
 ghp_*
+.next/
