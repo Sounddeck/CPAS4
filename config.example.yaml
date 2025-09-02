@@ -1,0 +1,78 @@
+# CPAS4 Configuration Template
+# Copy this file to config.yaml and customize as needed
+
+# Database Configuration
+database:
+  type: "mongodb"
+  host: "localhost"
+  port: 27017
+  name: "cpas4_db"
+  collection_prefix: "cpas4_"
+
+# LLM Configuration
+llm:
+  provider: "ollama"
+  model: "llama3"
+  base_url: "http://localhost:11434"
+  temperature: 0.7
+  max_tokens: 2000
+  timeout: 60
+
+# Agent Configuration
+agents:
+  default_agent: "react_agent"
+  max_iterations: 10
+  verbose: true
+  handle_parsing_errors: true
+
+# UI Configuration
+ui:
+  theme: "light"
+  window_width: 1200
+  window_height: 800
+  auto_save: true
+  save_interval: 30
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "logs/cpas4.log"
+  max_size: "10MB"
+  backup_count: 5
+
+# Memory Configuration
+memory:
+  max_history_length: 100
+  retention_days: 365
+  auto_cleanup: true
+
+# Tool Configuration
+tools:
+  enabled_tools:
+    - "web_search"
+    - "file_operations"
+    - "calculator"
+    - "date_time"
+    - "system_info"
+  
+  web_search:
+    provider: "duckduckgo"
+    max_results: 5
+    
+  file_operations:
+    allowed_directories:
+      - "~/Documents"
+      - "~/Desktop"
+    max_file_size: "10MB"
+
+# Security Configuration
+security:
+  enable_authentication: false
+  session_timeout: 3600
+  encrypt_sensitive_data: true
+
+# Performance Configuration
+performance:
+  max_concurrent_tasks: 3
+  cache_enabled: true
+  cache_ttl: 300
