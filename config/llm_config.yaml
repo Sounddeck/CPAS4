@@ -1,0 +1,29 @@
+# LLM Configuration for CPAS4
+default_provider: "ollama"
+providers:
+  ollama:
+    enabled: true
+    model: "llama3:latest"
+    base_url: "http://localhost:11434"
+  
+  zai:
+    enabled: true
+    model: "glm-4.5"
+    api_key: "your_api_key_here"
+  
+  openai:
+    enabled: false
+    model: "gpt-4"
+    api_key: ""
+
+# Task-specific LLM assignments
+task_specific:
+  web_research: "zai"
+  personal_notes: "ollama"
+  code_analysis: "zai"
+  general_chat: "ollama"
+
+# Data sharing settings
+data_sharing: "minimal"
+cache_responses: true
+max_cache_size: 1000
